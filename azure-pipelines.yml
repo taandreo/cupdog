@@ -19,8 +19,6 @@ pool:
     location: 'Brazil South'
     templateLocation: 'Linked artifact'
     csmFile: 'CreateWebApp/azuredeploy.json'
-    overrideParameters: |
-      -projectName CupDog
-      -linkedTemplateUri https://raw.githubusercontent.com/taandreo/cupdog-repo/master/CreateWebApp/linkedStorageAccount.json
+    overrideParameters: '-projectName CupDog -linkedTemplateUri https://raw.githubusercontent.com/taandreo/cupdog-repo/master/CreateWebApp/linkedStorageAccount.json'
     deploymentMode: 'Incremental'
     deploymentName: 'DeployPipelineTemplate'
