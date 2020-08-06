@@ -1,0 +1,26 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'cupdog-conn'
+    subscriptionId: 'bb08bee8-fa2d-47d3-b9cd-7777237aff34'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'cupdog-rg'
+    location: 'Brazil South'
+    templateLocation: 'Linked artifact'
+    csmFile: 'CreateWebApp/azuredeploy.json'
+    overrideParameters: |
+      -projectName CupDog
+      -linkedTemplateUri https://raw.githubusercontent.com/taandreo/cupdog-repo/master/CreateWebApp/linkedStorageAccount.json
+    deploymentMode: 'Incremental'
+    deploymentName: 'DeployPipelineTemplate'
